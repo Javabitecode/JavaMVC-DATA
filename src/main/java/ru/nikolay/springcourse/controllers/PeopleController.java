@@ -11,24 +11,24 @@ import ru.nikolay.springcourse.dao.PersonDAO;
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
-    private final PersonDAO personDAO;
+    private PersonDAO personDAO;
 
     @Autowired
-    public PeopleController(PersonDAO personDAO) {
+    public void setPersonDAO(PersonDAO personDAO) {
         this.personDAO = personDAO;
     }
 
-
     @GetMapping()
     public String index(Model model){
-
-
-        return "peole/index";
+        model.addAttribute("people", personDAO.index());
+        return "people/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model){
-
+        model.addAttribute("person", personDAO.show(id));
         return "people/show";
+
     }
+
 }
