@@ -12,12 +12,13 @@ private List<Person> people;
 private static int PEOPLE_COUNT;
 
     {
-        people = new ArrayList<>();
-        people.add(new Person(++PEOPLE_COUNT, "Kate"));
+        people=new ArrayList<>();
+
+        people.add(new Person(++PEOPLE_COUNT, "Tom"));
         people.add(new Person(++PEOPLE_COUNT, "Bob"));
+        people.add(new Person(++PEOPLE_COUNT, "Kate"));
         people.add(new Person(++PEOPLE_COUNT, "Mike"));
-        people.add(new Person(++PEOPLE_COUNT, "Nick"));
-        people.add(new Person(++PEOPLE_COUNT, "Lola"));
+
     }
 
     public List<Person> index(){
@@ -25,6 +26,23 @@ private static int PEOPLE_COUNT;
     }
 
     public Person show(int id){
-        return people.stream().filter(person ->person.getId()==id).findAny().orElse(null);
+        return people.stream().filter(person -> person.getId()==id).findAny().orElse(null);
     }
-}
+
+    public void save(Person person){
+        person.setId(++PEOPLE_COUNT);
+        people.add(person);
+    }
+    public void update(int id, Person person){
+        Person person1 = show(id);
+        person1.setName(person.getName());
+    }
+    public void delete(int id){
+        people.removeIf(person -> person.getId() ==id);
+
+        }
+    }
+
+
+
+
