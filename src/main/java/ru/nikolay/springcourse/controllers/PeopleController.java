@@ -36,13 +36,28 @@ public class PeopleController {
         return "people/new";
     }
 
+
     @PostMapping()
-    public String create(@RequestParam ("name") String name){
+    public String create(@ModelAttribute Person person){
+        personDAO.save(person);
+        System.out.println(person.getEmail());
+        return "redirect:/people";
+
+    }
+    /* заменен на @ModelAttribute
+    @PostMapping()
+    public String create(@RequestParam ("name") String name,
+                         @RequestParam ("email") String email,
+                         @RequestParam ("age") int age){
         Person person = new Person();
         person.setName(name);
+        person.setEmail(email);
+        person.setAge(age);
         personDAO.save(person);
         return "redirect:/people";
     }
+
+     */
 
     @GetMapping("/{id}/edit")
     public String edit(Model model,@PathVariable("id") int id ){
@@ -62,52 +77,6 @@ public class PeopleController {
         personDAO.delete(id);
         return "redirect:/people";
     }
-/*
-@GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("person", personDAO.show(id));
-        return "people/edit";
-    }
-    @PatchMapping("/{id}")
-    public String update(@ModelAttribute("person") Person person, @PathVariable("id") int id) {
-        personDAO.update(id, person);
-        return "redirect:/people";
-    }
 
-
-     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id) {
-        personDAO.delete(id);
-        return "redirect:/people";
-    }
-
-     */
-
-
-
-
-    /*
-    @PostMapping()
-    public String create(@RequestParam("name") String name, Model model){
-    Person person = new Person();
-    person.setName(name);
-    personDAO.save(person);
-
-
-    return "redirect:/people";
-
-    }
-
-     */
-
-
-    /*
-    @GetMapping("/calc")
-    public String test(@RequestParam(value = "name",required = false)String name, Model model){
-        model.addAttribute("name", name+ " "+"5");
-        return "people/test";
-    }
-
-     */
 
 }
