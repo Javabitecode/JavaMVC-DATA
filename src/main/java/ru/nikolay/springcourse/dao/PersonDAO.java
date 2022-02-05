@@ -10,7 +10,7 @@ import java.util.List;
 public class PersonDAO {
 private List<Person> people;
 private static int PEOPLE_COUNT;
-
+//jdbc:postgresql://localhost:5432/first_db
     {
         people=new ArrayList<>();
 
