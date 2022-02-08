@@ -46,7 +46,6 @@ public class PeopleController {
             return "people/new";
 
         personDAO.save(person);
-        System.out.println(person.getEmail());
         return "redirect:/people";
 
     }
